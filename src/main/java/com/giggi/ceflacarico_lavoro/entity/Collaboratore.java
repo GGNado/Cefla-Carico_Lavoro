@@ -4,6 +4,7 @@ import lombok.*;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "Collaboratori")
 public class Collaboratore {
     @Id
@@ -23,13 +25,6 @@ public class Collaboratore {
 
     @Column(name = "full_name", nullable = false, length = 150)
     private String fullName;
-
-    @Column(length = 255)
-    private String email;
-
-    @Builder.Default
-    @Column(nullable = false)
-    private boolean active = true;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)

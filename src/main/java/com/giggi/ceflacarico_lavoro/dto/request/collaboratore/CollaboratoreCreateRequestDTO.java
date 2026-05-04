@@ -6,5 +6,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CollaboratoreCreateRequestDTO {
-    // Altri campi
+    private String fullName;
+    private String email;
 }

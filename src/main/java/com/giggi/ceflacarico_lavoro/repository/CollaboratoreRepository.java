@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RepositoryRestResource(exported = false)
 public interface CollaboratoreRepository extends JpaRepository<Collaboratore, Long> {
+    Collaboratore findByUserAccount_Email(String userAccountEmail);
 }
