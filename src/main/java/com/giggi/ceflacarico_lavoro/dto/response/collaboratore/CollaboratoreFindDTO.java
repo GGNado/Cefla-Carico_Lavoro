@@ -1,5 +1,6 @@
 package com.giggi.ceflacarico_lavoro.dto.response.collaboratore;
 
+import com.giggi.ceflacarico_lavoro.dto.response.utente.UtenteFindDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,5 +8,6 @@ import lombok.Setter;
 @Getter
 public class CollaboratoreFindDTO {
     private Long id;
-    // Altri campi
+    private String fullName;
+    private UtenteFindDTO utente;
 }

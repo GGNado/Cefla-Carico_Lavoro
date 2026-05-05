@@ -10,13 +10,15 @@ import com.giggi.ceflacarico_lavoro.dto.request.collaboratore.CollaboratoreCreat
 import com.giggi.ceflacarico_lavoro.dto.request.collaboratore.CollaboratoreUpdateRequestDTO;
 import com.giggi.ceflacarico_lavoro.dto.response.collaboratore.CollaboratoreFindDTO;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {UtenteMapper.class})
 public interface CollaboratoreMapper {
 
+    
     Collaboratore convert(CollaboratoreCreateRequestDTO dto);
 
     Collaboratore convert(CollaboratoreUpdateRequestDTO dto);
 
+    @Mapping(source = "userAccount", target = "utente")
     CollaboratoreFindDTO convert(Collaboratore entity);
 
     List<CollaboratoreFindDTO> convert(List<Collaboratore> entities);

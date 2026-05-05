@@ -1,6 +1,7 @@
 package com.giggi.ceflacarico_lavoro.controller;
 
 import com.giggi.ceflacarico_lavoro.dto.request.attivita.AttivitaCreateRequestDTO;
+import com.giggi.ceflacarico_lavoro.dto.response.attivita.AttivitaFindAllDTO;
 import com.giggi.ceflacarico_lavoro.mapper.AttivitaMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,15 @@ public class AttivitaController {
     private final AttivitaMapper attivitaMapper;
 
     @GetMapping
-    public List<Attivita> getAllAttivitas() {
-        return attivitaService.findAll();
+    public ResponseEntity<?> getAllAttivitas() {
+        return ResponseEntity.ok().body(
+                new AttivitaFindAllDTO(
+                        attivitaService.findAll()
+                                .stream()
+                                .map(attivitaMapper::convert)
+                                .toList()
+                )
+        );
     }
 
     @PostMapping
