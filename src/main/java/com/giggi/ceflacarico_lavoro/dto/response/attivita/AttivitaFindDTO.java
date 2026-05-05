@@ -11,4 +11,5 @@ public class AttivitaFindDTO {
     private Long id;
     private String name;
     private BigDecimal averageTime;
+    private boolean active;
 }

@@ -1,6 +1,7 @@
 package com.giggi.ceflacarico_lavoro.controller;
 
 import com.giggi.ceflacarico_lavoro.dto.request.collaboratore.CollaboratoreCreateRequestDTO;
+import com.giggi.ceflacarico_lavoro.dto.response.collaboratore.CollaboratoreFindAllDTO;
 import com.giggi.ceflacarico_lavoro.dto.response.collaboratore.CollaboratoreFindDTO;
 import com.giggi.ceflacarico_lavoro.mapper.CollaboratoreMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,15 @@ public class CollaboratoreController {
     private final CollaboratoreMapper collaboratoreMapper;
 
     @GetMapping
-    public List<Collaboratore> getAllCollaboratores() {
-        return collaboratoreService.findAll();
+    public ResponseEntity<?> getAllCollaboratores() {
+        return ResponseEntity.ok().body(
+                new CollaboratoreFindAllDTO(
+                        collaboratoreService.findAll()
+                                .stream()
+                                .map(collaboratoreMapper::convert)
+                                .toList()
+                )
+        );
     }
 
     @PostMapping

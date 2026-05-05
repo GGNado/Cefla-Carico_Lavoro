@@ -6,6 +6,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class RoleFindDTO {
-    private Long id;
-    // Altri campi
+    private String name;
+    private String description;
 }
