@@ -7,5 +7,6 @@ import lombok.Setter;
 @Getter
 public class CollaboratoreUpdateRequestDTO {
     private Long id;
-    // altri campi da aggiornare
+    private String fullName;
+    private String email;
 }

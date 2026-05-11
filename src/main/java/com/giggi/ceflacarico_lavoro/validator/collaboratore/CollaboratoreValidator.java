@@ -1,6 +1,7 @@
 package com.giggi.ceflacarico_lavoro.validator.collaboratore;
 
 import com.giggi.ceflacarico_lavoro.dto.request.collaboratore.CollaboratoreCreateRequestDTO;
+import com.giggi.ceflacarico_lavoro.dto.request.collaboratore.CollaboratoreUpdateRequestDTO;
 import com.giggi.ceflacarico_lavoro.entity.Collaboratore;
 import com.giggi.ceflacarico_lavoro.entity.Utente;
 import com.giggi.ceflacarico_lavoro.repository.CollaboratoreRepository;
@@ -32,5 +33,21 @@ public class CollaboratoreValidator {
         if (collaboratore != null){
             throw new IllegalArgumentException("Esiste già un collaboratore con questa email");
         }
+    }
+
+    public void validate(CollaboratoreUpdateRequestDTO collaboratoreUpdateRequestDTO) {
+
+        if (collaboratoreUpdateRequestDTO.getEmail() == null) {
+            log.info("Email is null, devo scollegare l'account utente");
+            return;
+        }
+
+        Utente utente = utenteRepository.findByEmail(collaboratoreUpdateRequestDTO.getEmail());
+
+        if (utente == null) {
+            throw new IllegalArgumentException("Utente non trovato");
+        }
+
+        log.info("Utente trovato: {}", utente.getEmail());
     }
 }

@@ -1,9 +1,12 @@
 package com.giggi.ceflacarico_lavoro.controller;
 
 import com.giggi.ceflacarico_lavoro.dto.request.collaboratore.CollaboratoreCreateRequestDTO;
+import com.giggi.ceflacarico_lavoro.dto.request.collaboratore.CollaboratoreUpdateRequestDTO;
 import com.giggi.ceflacarico_lavoro.dto.response.collaboratore.CollaboratoreFindAllDTO;
 import com.giggi.ceflacarico_lavoro.dto.response.collaboratore.CollaboratoreFindDTO;
 import com.giggi.ceflacarico_lavoro.mapper.CollaboratoreMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +24,7 @@ public class CollaboratoreController {
     private final CollaboratoreMapper collaboratoreMapper;
 
     @GetMapping
-    public ResponseEntity<?> getAllCollaboratores() {
+    public ResponseEntity<?> getAllCollaboratore() {
         return ResponseEntity.ok().body(
                 new CollaboratoreFindAllDTO(
                         collaboratoreService.findAll()
@@ -38,6 +41,19 @@ public class CollaboratoreController {
         return ResponseEntity.ok(
                 collaboratoreMapper.convert(
                         collaboratoreService.save(collaboratoreCreateRequestDTO)
+                )
+        );
+    }
+
+    @Operation(
+            summary = "Get all collaboratori",
+            description = "Roles: ADMIN, MANAGER"
+    )
+    @PatchMapping
+    public ResponseEntity<?> updateCollaboratore(@RequestBody CollaboratoreUpdateRequestDTO collaboratoreUpdateRequestDTO) {
+        return ResponseEntity.ok(
+                collaboratoreMapper.convert(
+                        collaboratoreService.update(collaboratoreUpdateRequestDTO)
                 )
         );
     }

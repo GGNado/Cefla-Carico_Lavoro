@@ -1,7 +1,9 @@
 package com.giggi.ceflacarico_lavoro.mapper;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import com.giggi.ceflacarico_lavoro.dto.request.attivita.AttivitaUpdateRequestDTO;
+import com.giggi.ceflacarico_lavoro.entity.Attivita;
+import jakarta.persistence.MapsId;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -22,4 +24,8 @@ public interface CollaboratoreMapper {
     CollaboratoreFindDTO convert(Collaboratore entity);
 
     List<CollaboratoreFindDTO> convert(List<Collaboratore> entities);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateCollaboratoreFromDTO(CollaboratoreUpdateRequestDTO dto, @MappingTarget Collaboratore collaboratore);
+
 }

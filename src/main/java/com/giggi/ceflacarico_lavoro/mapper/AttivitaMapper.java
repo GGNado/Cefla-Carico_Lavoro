@@ -1,7 +1,6 @@
 package com.giggi.ceflacarico_lavoro.mapper;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -20,4 +19,8 @@ public interface AttivitaMapper {
     AttivitaFindDTO convert(Attivita entity);
 
     List<AttivitaFindDTO> convert(List<Attivita> entities);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateAttivitaFromDTO(AttivitaUpdateRequestDTO dto, @MappingTarget Attivita attivita);
+
 }

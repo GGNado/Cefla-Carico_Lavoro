@@ -1,6 +1,7 @@
 package com.giggi.ceflacarico_lavoro.service.impl;
 
 import com.giggi.ceflacarico_lavoro.dto.request.collaboratore.CollaboratoreCreateRequestDTO;
+import com.giggi.ceflacarico_lavoro.dto.request.collaboratore.CollaboratoreUpdateRequestDTO;
 import com.giggi.ceflacarico_lavoro.entity.Utente;
 import com.giggi.ceflacarico_lavoro.mapper.CollaboratoreMapper;
 import com.giggi.ceflacarico_lavoro.repository.UtenteRepository;
@@ -43,7 +44,40 @@ public class CollaboratoreServiceImpl implements CollaboratoreService {
     }
 
     @Override
-    public Collaboratore update(Collaboratore collaboratore) {
+    @Transactional
+    public Collaboratore update(CollaboratoreUpdateRequestDTO collaboratoreUpdateRequestDTO) {
+        collaboratoreValidator.validate(collaboratoreUpdateRequestDTO);
+
+        Collaboratore collaboratore = collaboratoreRepository.findById(collaboratoreUpdateRequestDTO.getId()).orElseThrow(
+                () -> new RuntimeException("Collaboratore non trovato")
+        );
+
+        collaboratoreMapper.updateCollaboratoreFromDTO(collaboratoreUpdateRequestDTO, collaboratore);
+
+        Utente utenteAttuale = null;
+        Utente utenteDaCollegare = null;
+
+        if (collaboratore.getUserAccount() != null) {
+            utenteAttuale = utenteRepository.findByEmail(collaboratore.getUserAccount().getEmail());
+        }
+
+        if (collaboratoreUpdateRequestDTO.getEmail() != null) {
+            utenteDaCollegare = utenteRepository.findByEmail(collaboratoreUpdateRequestDTO.getEmail());
+        }
+
+        if (utenteAttuale != null) {
+            utenteAttuale.setCollaborator(null);
+            collaboratore.setUserAccount(null);
+        }
+
+        if (utenteDaCollegare != null){
+            utenteDaCollegare.setCollaborator(collaboratore);
+            collaboratore.setUserAccount(utenteDaCollegare);
+        }
+
+
+
+
         return collaboratoreRepository.save(collaboratore);
     }
 
