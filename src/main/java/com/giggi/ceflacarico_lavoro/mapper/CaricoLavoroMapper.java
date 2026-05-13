@@ -17,6 +17,9 @@ public interface CaricoLavoroMapper {
 
     CaricoLavoro convert(CaricoLavoroUpdateRequestDTO dto);
 
+    @Mapping(source = "collaborator.fullName", target = "nomeCollaboratore")
+    @Mapping(source = "activityType.name", target = "nomeAttivita")
+    @Mapping(source = "createdBy.username", target = "nomeUtente")
     CaricoLavoroFindDTO convert(CaricoLavoro entity);
 
     List<CaricoLavoroFindDTO> convert(List<CaricoLavoro> entities);

@@ -1,22 +1,31 @@
 package com.giggi.ceflacarico_lavoro.controller;
 
+import com.giggi.ceflacarico_lavoro.dto.request.caricolavoro.CaricoLavoroCreateRequestDTO;
+import com.giggi.ceflacarico_lavoro.mapper.CaricoLavoroMapper;
+import com.giggi.ceflacarico_lavoro.service.CaricoLavoroService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-import com.giggi.ceflacarico_lavoro.entity.CaricoLavoro;
-import com.giggi.ceflacarico_lavoro.service.CaricoLavoroService;
-
 @RestController
-@RequestMapping("/api/caricoLavoros")
+@RequestMapping("/api/caricoLavoro")
 @RequiredArgsConstructor
 public class CaricoLavoroController {
     private final CaricoLavoroService caricoLavoroService;
+    private final CaricoLavoroMapper caricoLavoroMapper;
 
     @GetMapping
-    public List<CaricoLavoro> getAllCaricoLavoros() {
-        return caricoLavoroService.findAll();
+    public ResponseEntity<?> getAllCaricoLavoro() {
+
+        return ResponseEntity.ok(
+                caricoLavoroMapper.convert(caricoLavoroService.findAll())
+        );
     }
-    // CRUD endpoints qui
+
+    @PostMapping
+    public ResponseEntity<?> createCaricoLavoro(@RequestBody CaricoLavoroCreateRequestDTO caricoLavoroCreateRequestDTO) {
+        return ResponseEntity.ok(
+                caricoLavoroMapper.convert(caricoLavoroService.save(caricoLavoroCreateRequestDTO))
+        );
+    }
 }

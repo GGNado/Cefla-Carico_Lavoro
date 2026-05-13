@@ -18,7 +18,7 @@ public class CollaboratoreValidator {
     private final UtenteRepository utenteRepository;
 
     public void validate(CollaboratoreCreateRequestDTO collaboratoreCreateRequestDTO) {
-        if (collaboratoreCreateRequestDTO.getEmail().isEmpty()) {
+        if (collaboratoreCreateRequestDTO.getEmail() == null) {
             log.info("Email is empty, nessun account collegato");
             return;
         }

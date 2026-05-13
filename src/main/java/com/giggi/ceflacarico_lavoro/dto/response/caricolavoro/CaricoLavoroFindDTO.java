@@ -7,5 +7,11 @@ import lombok.Setter;
 @Getter
 public class CaricoLavoroFindDTO {
     private Long id;
-    // Altri campi
+    private String nomeAttivita;
+    private String nomeCollaboratore;
+    private String nomeUtente;
+    private String inputDate;
+    private Integer quantity;
+    private String estimatedTime;
+    private String notes;
 }
