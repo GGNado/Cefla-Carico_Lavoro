@@ -1,0 +1,19 @@
+stages:
+  - deploy
+
+variables:
+  SERVER_IP: $CEFLA_SERVER_IP
+  DEPLOY_DIR: "/opt/cefla"
+
+deploy_backend:
+  stage: deploy
+  tags:
+    - cefla-runner
+  only:
+    - main
+  script:
+    - echo "Inizio deploy Backend su Cefla Server..."
+    - rsync -av --exclude='.git' ./ $DEPLOY_DIR/backend/
+    - cd $DEPLOY_DIR
+    - docker compose up -d --build backend
+    - echo "Deploy Backend completato."

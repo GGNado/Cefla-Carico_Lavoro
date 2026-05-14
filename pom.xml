@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.giggi</groupId>
-    <artifactId>Cefla-Carico_Lavoro</artifactId>
+    <artifactId>Cefla-Carico-Lavoro_BE</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Cefla-Carico_Lavoro</name>
-    <description>Cefla-Carico_Lavoro</description>
+    <name>Cefla-Carico-Lavoro_BE</name>
+    <description>Cefla-Carico-Lavoro_BE</description>
     <url/>
     <licenses>
         <license/>

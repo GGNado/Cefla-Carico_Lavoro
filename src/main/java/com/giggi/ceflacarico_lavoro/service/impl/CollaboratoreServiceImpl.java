@@ -75,9 +75,6 @@ public class CollaboratoreServiceImpl implements CollaboratoreService {
             collaboratore.setUserAccount(utenteDaCollegare);
         }
 
-
-
-
         return collaboratoreRepository.save(collaboratore);
     }
 
