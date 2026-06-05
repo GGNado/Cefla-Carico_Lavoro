@@ -41,8 +41,4 @@ public class Attivita {
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
-
-    @OneToMany(mappedBy = "activityType", fetch = FetchType.LAZY)
-    @Builder.Default
-    private List<CaricoLavoro> workloadEntries = new ArrayList<>();
 }
