@@ -1,7 +1,7 @@
 package com.giggi.ceflacarico_lavoro.entity;
 
-import lombok.*;
 import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -9,30 +9,29 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Setter
 @Getter
-@Builder
-@AllArgsConstructor
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
+@Table(name = "attivita_commessa")
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "commesse")
-public class Commessa {
+public class AttivitaCommessa {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 20)
-    private String codice;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "commessa_id", nullable = false)
+    private Commessa commessa;
+
+    @Column(length = 100)
+    private String nome;
 
     @Column(length = 500)
     private String descrizione;
-
-    @Column(length = 50)
-    private String tipo;
-
-    @Column(length = 150)
-    private String responsabile;
 
     @Column(name = "data_inizio")
     private LocalDate dataInizio;
@@ -40,14 +39,8 @@ public class Commessa {
     @Column(name = "data_fine")
     private LocalDate dataFine;
 
-    @Column(name = "stima_inizio")
-    private LocalDate stimaInizio;
-
-    @Column(name = "stima_fine")
-    private LocalDate stimaFine;
-
-    @Column(name = "giornate_stimate")
-    private Integer giornateStimate;
+    @Column(length = 150)
+    private String assegnatario;
 
     @Builder.Default
     @Column(nullable = false)
@@ -60,8 +53,4 @@ public class Commessa {
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
-
-    @OneToMany(mappedBy = "commessa", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
-    private java.util.List<AttivitaCommessa> attivita = new java.util.ArrayList<>();
 }
