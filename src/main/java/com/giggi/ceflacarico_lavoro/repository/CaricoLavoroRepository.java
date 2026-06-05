@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 @RepositoryRestResource(exported = false)
 public interface CaricoLavoroRepository extends JpaRepository<CaricoLavoro, Long> {
-	List<CaricoLavoro> findAllByOrderByCreatedAtDesc();
+    List<CaricoLavoro> findAllByDeletedFalseOrderByCreatedAtDesc();
+    List<CaricoLavoro> findAllByOrderByCreatedAtDesc();
 }
