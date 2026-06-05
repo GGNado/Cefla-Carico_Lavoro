@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 public class CaricoLavoroUpdateRequestDTO {
     private Long id;
-    private Long idAttivita;
+    private Long idAttivitaCommessa;
     private Long idCollaboratore;
     private LocalDate inputDate;
     private Integer quantity;

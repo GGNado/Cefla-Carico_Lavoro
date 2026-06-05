@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 public class CaricoLavoroCreateRequestDTO {
-    private Long idAttivita;
+    private Long idAttivitaCommessa;
     private Long idCollaboratore;
     private Long idUtente;
     private LocalDate inputDate;

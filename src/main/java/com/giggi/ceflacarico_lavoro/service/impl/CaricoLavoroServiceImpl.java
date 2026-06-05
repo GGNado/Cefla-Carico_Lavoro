@@ -2,10 +2,10 @@ package com.giggi.ceflacarico_lavoro.service.impl;
 
 import com.giggi.ceflacarico_lavoro.dto.request.caricolavoro.CaricoLavoroCreateRequestDTO;
 import com.giggi.ceflacarico_lavoro.dto.request.caricolavoro.CaricoLavoroUpdateRequestDTO;
-import com.giggi.ceflacarico_lavoro.entity.Attivita;
+import com.giggi.ceflacarico_lavoro.entity.AttivitaCommessa;
 import com.giggi.ceflacarico_lavoro.entity.Collaboratore;
 import com.giggi.ceflacarico_lavoro.mapper.CaricoLavoroMapper;
-import com.giggi.ceflacarico_lavoro.repository.AttivitaRepository;
+import com.giggi.ceflacarico_lavoro.repository.AttivitaCommessaRepository;
 import com.giggi.ceflacarico_lavoro.repository.CollaboratoreRepository;
 import com.giggi.ceflacarico_lavoro.resolver.caricolavoro.CaricoLavoroContext;
 import com.giggi.ceflacarico_lavoro.resolver.caricolavoro.CaricoLavoroResolver;
@@ -29,7 +29,7 @@ public class CaricoLavoroServiceImpl implements CaricoLavoroService {
     private final CaricoLavoroRepository caricoLavoroRepository;
     private final CaricoLavoroMapper caricoLavoroMapper;
     private final CaricoLavoroResolver caricoLavoroResolver;
-    private final AttivitaRepository attivitaRepository;
+    private final AttivitaCommessaRepository attivitaCommessaRepository;
     private final CollaboratoreRepository collaboratoreRepository;
 
     @Override
@@ -37,7 +37,7 @@ public class CaricoLavoroServiceImpl implements CaricoLavoroService {
         CaricoLavoroContext caricoLavoroContext = caricoLavoroResolver.resolve(caricoLavoroCreateRequestDTO);
         CaricoLavoro caricoLavoro = caricoLavoroMapper.convert(caricoLavoroCreateRequestDTO);
         caricoLavoro.setCollaborator(caricoLavoroContext.collaboratore());
-        caricoLavoro.setActivityType(caricoLavoroContext.attivita());
+        caricoLavoro.setActivityType(caricoLavoroContext.attivitaCommessa());
         caricoLavoro.setCreatedBy(caricoLavoroContext.utente());
         return caricoLavoroRepository.save(caricoLavoro);
     }
@@ -59,10 +59,10 @@ public class CaricoLavoroServiceImpl implements CaricoLavoroService {
         if (dto.getNotes() != null) {
             existing.setNotes(dto.getNotes());
         }
-        if (dto.getIdAttivita() != null) {
-            Attivita attivita = attivitaRepository.findById(dto.getIdAttivita())
-                    .orElseThrow(() -> new EntityNotFoundException("Attivita non trovata"));
-            existing.setActivityType(attivita);
+        if (dto.getIdAttivitaCommessa() != null) {
+            AttivitaCommessa attivitaCommessa = attivitaCommessaRepository.findById(dto.getIdAttivitaCommessa())
+                    .orElseThrow(() -> new EntityNotFoundException("AttivitaCommessa non trovata"));
+            existing.setActivityType(attivitaCommessa);
         }
         if (dto.getIdCollaboratore() != null) {
             Collaboratore collaboratore = collaboratoreRepository.findById(dto.getIdCollaboratore())

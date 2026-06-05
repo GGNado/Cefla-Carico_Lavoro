@@ -29,7 +29,7 @@ public class CaricoLavoro {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "activity_type_id", nullable = false)
-    private Attivita activityType;
+    private AttivitaCommessa activityType;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "collaborator_id", nullable = false)
@@ -67,10 +67,4 @@ public class CaricoLavoro {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    public BigDecimal calculateSuggestedTime() {
-        if (activityType == null || activityType.getAverageTime() == null || quantity == null) {
-            return null;
-        }
-        return activityType.getAverageTime().multiply(BigDecimal.valueOf(quantity));
-    }
 }

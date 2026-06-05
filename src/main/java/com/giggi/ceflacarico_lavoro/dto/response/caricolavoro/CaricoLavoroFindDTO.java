@@ -3,11 +3,13 @@ package com.giggi.ceflacarico_lavoro.dto.response.caricolavoro;
 import lombok.Getter;
 import lombok.Setter;
 
+import com.giggi.ceflacarico_lavoro.dto.response.attivita_commessa.AttivitaCommessaFindDTO;
+
 @Setter
 @Getter
 public class CaricoLavoroFindDTO {
     private Long id;
-    private String nomeAttivita;
+    private AttivitaCommessaFindDTO attivitaCommessa;
     private String nomeCollaboratore;
     private String nomeUtente;
     private String inputDate;
