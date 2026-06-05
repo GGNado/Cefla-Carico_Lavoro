@@ -1,7 +1,7 @@
 package com.giggi.ceflacarico_lavoro.init;
 
 import com.giggi.ceflacarico_lavoro.entity.*;
-import com.giggi.ceflacarico_lavoro.repository.AttivitaRepository;
+
 import com.giggi.ceflacarico_lavoro.repository.CollaboratoreRepository;
 import com.giggi.ceflacarico_lavoro.repository.RoleRepository;
 import com.giggi.ceflacarico_lavoro.repository.UtenteRepository;
@@ -25,7 +25,7 @@ public class DataLoader implements CommandLineRunner {
     private final RoleRepository roleRepository;
     private final UtenteRepository utenteRepository;
     private final CollaboratoreRepository collaboratoreRepository;
-    private final AttivitaRepository attivitaRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -47,12 +47,6 @@ public class DataLoader implements CommandLineRunner {
         if (utenti.isEmpty()) {
             loadUtente();
             log.info("Utente aggiunto al DB");
-        }
-
-        List<Attivita> attivita = attivitaRepository.findAll();
-        if (attivita.isEmpty()) {
-            loadAttivita();
-            log.info("Attività aggiunte al DB");
         }
 
         log.info("Dati iniziali caricati con successo!");
@@ -118,28 +112,4 @@ public class DataLoader implements CommandLineRunner {
         utenteRepository.saveAll(utenti);
     }
 
-    private void loadAttivita() {
-        List<Attivita> attivita = new ArrayList<>();
-
-        attivita.add(createAttivita("ORDINE", new BigDecimal("0.41")));
-        attivita.add(createAttivita("GESTIONE PRATICHE (ORDINE, STAMPE, CONTROLLO , ETC..)", new BigDecimal("0.41")));
-        attivita.add(createAttivita("MODIFICA ORDINE", new BigDecimal("0.41")));
-        attivita.add(createAttivita("OFFERTA", new BigDecimal("0.47")));
-        attivita.add(createAttivita("SPEDIZIONE", new BigDecimal("0.46")));
-        attivita.add(createAttivita("PIANO SPEDIZIONE", new BigDecimal("0.46")));
-        attivita.add(createAttivita("TOUCH POINT COL CLIENTE", new BigDecimal("1.6")));
-        attivita.add(createAttivita("GESTIONE CREDITO", new BigDecimal("0.23")));
-        attivita.add(createAttivita("ATTIVITA' KU/ SPECIALIST", new BigDecimal("0.81")));
-        attivita.add(createAttivita("ALTRO", new BigDecimal("0.81")));
-
-        attivitaRepository.saveAll(attivita);
-    }
-
-    private Attivita createAttivita(String name, BigDecimal averageTime) {
-        Attivita activity = new Attivita();
-        activity.setName(name);
-        activity.setAverageTime(averageTime);
-        activity.setActive(true);
-        return activity;
-    }
 }
