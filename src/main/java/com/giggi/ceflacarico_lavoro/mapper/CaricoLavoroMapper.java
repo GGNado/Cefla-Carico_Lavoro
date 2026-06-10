@@ -10,7 +10,7 @@ import com.giggi.ceflacarico_lavoro.dto.request.caricolavoro.CaricoLavoroCreateR
 import com.giggi.ceflacarico_lavoro.dto.request.caricolavoro.CaricoLavoroUpdateRequestDTO;
 import com.giggi.ceflacarico_lavoro.dto.response.caricolavoro.CaricoLavoroFindDTO;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {AttivitaCommessaMapper.class})
 public interface CaricoLavoroMapper {
 
     CaricoLavoro convert(CaricoLavoroCreateRequestDTO dto);
