@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Setter
 public class AttivitaCommessaFindDTO {
     private Long id;
+    private String commessaCodice;
     private String nome;
     private String descrizione;
     private LocalDate dataInizio;

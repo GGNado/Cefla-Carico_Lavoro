@@ -1,7 +1,5 @@
 package com.giggi.ceflacarico_lavoro.mapper;
 
-import com.giggi.ceflacarico_lavoro.dto.request.attivita.AttivitaUpdateRequestDTO;
-import com.giggi.ceflacarico_lavoro.entity.Attivita;
 import jakarta.persistence.MapsId;
 import org.mapstruct.*;
 
